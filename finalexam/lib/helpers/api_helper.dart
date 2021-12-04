@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 
+import 'package:finalexam/Models/Finals.dart';
 import 'package:finalexam/Models/response.dart';
 import 'package:finalexam/Models/token.dart';
 import 'package:finalexam/helpers/constans.dart';
@@ -29,6 +30,33 @@ class ApiHelper {
     }
 
     return Response(isSuccess: true);
+  }
+
+  static Future<Response> getInstallations(Token token) async {
+    var url = Uri.parse('${Constans.apiUrl}/api/Finals');
+    var response = await http.get(
+      url,
+      headers: {
+        'content-type' : 'application/json',
+        'accept' : 'application/json',
+        'authorization': 'bearer ${token.token}',
+      },
+    );
+
+    var body = response.body;
+    if (response.statusCode >= 400) {
+      return Response(isSuccess: false, message: body);
+    }
+
+    List<finals> list = [];    
+    var decodedJson = jsonDecode(body);
+    if (decodedJson != null) {
+      for (var item in decodedJson) {
+        list.add(finals.fromJson(item));
+      }
+    }
+
+    return Response(isSuccess: true, result: list);
   }
 
     static bool _validToken(Token token) {

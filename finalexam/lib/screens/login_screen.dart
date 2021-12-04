@@ -1,16 +1,17 @@
-
 import 'dart:convert';
-
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+
+import 'package:email_validator/email_validator.dart';
+import 'package:finalexam/Models/home_screen.dart';
 import 'package:finalexam/Models/token.dart';
 import 'package:finalexam/components/loader_component.dart';
 import 'package:finalexam/helpers/constans.dart';
-import 'package:finalexam/screens/form.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -65,19 +66,22 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+ 
 Widget _showButtons() {
   return Container(
     margin: EdgeInsets.only(left: 10, right: 10),
     child: Column(
       children: [
-        
+
          _showGoogleLoginButton(),
+
       ],
     ),
     
   );
   
 }
+
   Widget _showGoogleLoginButton() {
     return Row(
       children: <Widget>[
@@ -115,6 +119,7 @@ Widget _showButtons() {
        await _socialLogin(request);
   }
   
+
    Future _socialLogin(Map<String, dynamic> request) async {
 
      var url = Uri.parse('${Constans.apiUrl}/api/Account/SocialLogin');
@@ -153,7 +158,7 @@ var decodedJson = jsonDecode(body);
     Navigator.pushReplacement(
       context, 
       MaterialPageRoute(
-        builder: (context) => FormScreen()
+       builder: (context) => HomeScreen(token: token,)
       )
     );
 
