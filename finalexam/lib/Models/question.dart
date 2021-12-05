@@ -7,6 +7,7 @@ import 'package:finalexam/components/loader_component.dart';
 import 'package:finalexam/helpers/api_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class QuestionScreen extends StatefulWidget {
   
@@ -108,12 +109,14 @@ theBest: '', theWorst: '',  );
             child : 
           Column(
             children: <Widget>[
-              _showRemask(),
+              
               _showemail(),
-              _showqualification(),
               _showtheBest(),
               _showtheWorst(),
+              _showRemask(),
+             _showqualification(),
               _showButtons(),
+         
 
             ],
           ),
@@ -277,7 +280,6 @@ _addRecord() async {
       return;
     }
 
-    Navigator.pop(context, 'yes');
   }
 
  
@@ -290,6 +292,27 @@ _addRecord() async {
       _remaskError = 'Debes ingresar una descripción.';
     } else {
       _remaskShowError = false;
+    }
+     if (_email.isEmpty) {
+      isValid = false;
+      _emailShowError = true;
+      _emailError = 'Debes ingresar un email.';
+    } else {
+      _emailShowError = false;
+    }
+     if (_theWorst.isEmpty) {
+      isValid = false;
+     _theWorstShowError = true;
+    _theWorsttError = 'Debes ingresar información.';
+    } else {
+      _theWorstShowError = false;
+    }
+     if (_theBest.isEmpty) {
+      isValid = false;
+     _theBestShowError = true;
+    _theBestError = 'Debes ingresar información.';
+    } else {
+     _theBestShowError = false;
     }
     setState(() { });
     return isValid;
@@ -322,28 +345,22 @@ _addRecord() async {
   }
 
   _showqualification() {
-    return Container(
-      padding: EdgeInsets.all(30),
-      child: TextField(
-        controller: _qualificationtController,
-        decoration: InputDecoration(
-          hintText: 'Ingresa una calificación...',
-          labelText: 'Calificación',
-          errorText: _qualificationShowError ? _qualificationtError : null,
-          suffixIcon: Icon(Icons.description),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10)
-          ),
-        ),
-        onChanged: (value) {
-          _remarks = value;
-        },
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-        ),
-      ),
-    );
+    return RatingBar.builder(
+   initialRating: 3,
+   minRating: 1,
+   direction: Axis.horizontal,
+   allowHalfRating: true,
+   itemCount: 5,
+   itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+   itemBuilder: (context, _) => Icon(
+     Icons.star,
+     color: Colors.amber,
+     ),
+   onRatingUpdate: (rating) {
+     _qualification = rating.toInt();
+     print(rating);
+     },
+);
   }
 
   _showtheBest() {
