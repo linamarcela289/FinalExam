@@ -1,4 +1,6 @@
 
+
+import 'package:finalexam/Models/question.dart';
 import 'package:finalexam/Models/token.dart';
 import 'package:finalexam/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -66,62 +68,7 @@ Widget _getBody() {
       ),),
  ),
 
- SizedBox(height: 10,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('Llamar',
-            //  style: GoogleFonts.oswald(textStyle: headline4),),
-           style: GoogleFonts.lato(
-        textStyle: Theme.of(context).textTheme.headline4,
-        fontSize: 20,
-        fontWeight: FontWeight.w700,
-        fontStyle: FontStyle.italic,
-      ),),
-              SizedBox(width: 10,),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  color: Colors.blue,
-                  child: IconButton(
-                    icon: Icon(Icons.call, color: Colors.white,),
-                    onPressed: () => launch("tel://+573148795829"), 
-                  ),
-                ),
-              )
-            ],
-          ), 
-
-           SizedBox(height: 10,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('Enviar mensaje',
-              style: GoogleFonts.lato(
-              textStyle: Theme.of(context).textTheme.headline4,
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              fontStyle: FontStyle.italic,
-      ),
-              ),
-              SizedBox(width: 10,),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  color: Colors.green,
-                  child: IconButton(
-                    icon: Icon(Icons.insert_comment, color: Colors.white,),
-                    onPressed: () => _sendMessage(), 
-                  ),
-                ),
-              )
-            ],
-          ), 
-      ],
+       ],
     ),
   )
    );
@@ -143,7 +90,7 @@ Widget _getBody() {
             ),
 
      ListTile(
-            leading: Icon(Icons.logout),
+            leading: Icon(Icons.question_answer),
             title: Text("Encuesta",
                style: GoogleFonts.lato(
                 textStyle: Theme.of(context).textTheme.headline4,
@@ -155,7 +102,7 @@ Widget _getBody() {
                Navigator.pushReplacement(
                 context, 
                 MaterialPageRoute(
-                builder: (context) => LoginScreen()
+                builder: (context) => QuestionScreen(token: widget.token,)
                 ),
               );
             },
@@ -173,7 +120,7 @@ Widget _getBody() {
                Navigator.pushReplacement(
                 context, 
                 MaterialPageRoute(
-                builder: (context) => LoginScreen()
+                builder: (context) => QuestionScreen(token: widget.token,)
                 ),
               );
             },
@@ -196,7 +143,7 @@ Widget _getCustomerMenu() {
             ),
             ),
             ListTile(
-              leading: Icon(Icons.store),
+              leading: Icon(Icons.question_answer),
               title: Text("Encuesta",
                style: GoogleFonts.lato(
               textStyle: Theme.of(context).textTheme.headline4,
@@ -223,7 +170,7 @@ Widget _getCustomerMenu() {
                Navigator.pushReplacement(
                 context, 
                 MaterialPageRoute(
-                builder: (context) => LoginScreen()
+                builder: (context) => QuestionScreen(token: widget.token)
                 ),
               );
             },

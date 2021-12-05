@@ -50,6 +50,7 @@ dependencies:
   bottom_navy_bar: ^6.0.0
   shared_preferences: ^2.0.8
   country_picker: ^2.0.8
+  flutter_rating_bar: ^4.0.0
 
 dev_dependencies:
   flutter_test:

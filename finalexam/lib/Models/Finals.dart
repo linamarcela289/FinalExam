@@ -1,4 +1,4 @@
-class finals {
+class Finals {
   int id =0;
   String date ="";
   String email="";
@@ -7,7 +7,7 @@ class finals {
   String theWorst="";
   String remarks="";
 
-  finals(
+  Finals(
       {required this.id,
       required this.date,
       required this.email,
@@ -18,14 +18,14 @@ class finals {
       
       });
 
-  finals.fromJson(Map<String, dynamic> json) {
+  Finals.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     date = json['date'];
-    email = json['email'];
-    qualification = json['qualification'];
-    theBest = json['theBest'];
-    theWorst = json['theWorst'];
-    remarks = json['remarks'];
+    email = json['email'] == null ? "" : json['email'];
+    qualification = json['qualification'] == null ? "" : json['qualification'];
+    theBest = json['theBest'] == null ? "" : json['theBest'];
+    theWorst = json['theWorst'] == null ? "" : json['theWorst'];
+    remarks = json['remarks'] == null ? "" : json['remarks'];
   }
 
   Map<String, dynamic> toJson() {
